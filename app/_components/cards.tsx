@@ -1,45 +1,64 @@
-import styled from "styled-components";
-import Link from "next/link";
+"use client";
 
-const FlexContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column wrap;
-  max-width: 800px;
-  margin-top: 3rem;
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+type Character = {
+  id: number;
+  name: string;
+  image: string;
+};
+
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
 `;
 
 const Card = styled.div`
-  padding: 1.5rem;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid black;
-  border-radius: 10px;
-  transition:
-    color 0.15s ease,
-    border-color 0.15s ease;
-  width: 100%;
+  background: #111;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease;
+  cursor: pointer;
 
-  &:hover,
-  :focus,
-  :active {
-    color: #0070f3;
-    border-color: #0070f3;
+  &:hover {
+    transform: scale(1.05);
   }
 `;
 
-const StyledLink = styled(Link)`
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
+const Image = styled.img`
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+`;
+
+const Name = styled.h3`
+  padding: 1rem;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
 `;
 
 export default function Cards() {
+  const [characters, setCharacters] = useState<Character[]>([]);
+
+  useEffect(() => {
+    fetch("https://akabab.github.io/starwars-api/api/all.json")
+      .then((res) => res.json())
+      .then((data) => setCharacters(data.slice(0, 20))); // limit to 20 for now
+  }, []);
+
   return (
-    <FlexContainer>
-      <Card>
-        <StyledLink href="/about">About Page &rarr;</StyledLink>
-      </Card>
-    </FlexContainer>
+    <Grid>
+      {characters.map((char) => (
+        <Card key={char.id}>
+          <Image src={char.image} alt={char.name} />
+          <Name>{char.name}</Name>
+        </Card>
+      ))}
+    </Grid>
   );
 }
