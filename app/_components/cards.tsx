@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -54,10 +54,12 @@ export default function Cards() {
   return (
     <Grid>
       {characters.map((char) => (
-        <Card key={char.id}>
-          <Image src={char.image} alt={char.name} />
-          <Name>{char.name}</Name>
-        </Card>
+        <Link href={`/characters/${char.id}`} key={char.id}>
+          <Card>
+            <Image src={char.image} alt={char.name} />
+            <Name>{char.name}</Name>
+          </Card>
+        </Link>
       ))}
     </Grid>
   );
