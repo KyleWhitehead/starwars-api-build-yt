@@ -1,10 +1,8 @@
-"use client";
 import {
   Container,
   Main,
   Title,
   Description,
-  CodeTag,
 } from "./_components/sharedstyles";
 import Cards from "./_components/cards";
 
@@ -17,15 +15,10 @@ export default function Home() {
   return (
     <Container>
       <Main>
-        <Title>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </Title>
-
+        <Title>Star Wars Characters</Title>
         <Description>
-          Get started by editing
-          <CodeTag>app/page.tsx</CodeTag>
+          Browse characters from the Star Wars universe
         </Description>
-
         <Cards />
       </Main>
     </Container>
