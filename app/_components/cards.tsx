@@ -143,7 +143,7 @@ export default function Cards() {
             <Link key={char.id} href={`/characters/${char.id}`}>
               {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
               }
-              <Card>
+              <div>
                 {/* next/image will optimize the image; width/height help layout stability */}
                 <div style={{ position: "relative", width: "100%", height: 220 }}>
                   <Image
@@ -156,7 +156,7 @@ export default function Cards() {
                   />
                 </div>
                 <Name>{char.name}</Name>
-              </Card>
+              </div>
             </Link>
           ))}
         </Grid>
