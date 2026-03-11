@@ -130,18 +130,19 @@ export default function Cards() {
         placeholder="Search characters (e.g. luke, vader, yoda)..."
         aria-label="Search characters"
       />
-
       {loading ? (
         // show skeleton grid
-        <Grid>
+        (<Grid>
           {Array.from({ length: 8 }).map((_, i) => (
             <SkeletonCard key={i} />
           ))}
-        </Grid>
+        </Grid>)
       ) : (
         <Grid>
           {visible.map((char) => (
-            <Link key={char.id} href={`/characters/${char.id}`} passHref legacyBehavior>
+            <Link key={char.id} href={`/characters/${char.id}`}>
+              {/* @next-codemod-error This Link previously used the now removed `legacyBehavior` prop, and has a child that might not be an anchor. The codemod bailed out of lifting the child props to the Link. Check that the child component does not render an anchor, and potentially move the props manually to Link. */
+              }
               <Card>
                 {/* next/image will optimize the image; width/height help layout stability */}
                 <div style={{ position: "relative", width: "100%", height: 220 }}>

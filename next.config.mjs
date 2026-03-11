@@ -1,22 +1,26 @@
-// @ts-check
-
-/**
- * @type {import('next').NextConfig}
- */
+/** next.config.mjs */
 const nextConfig = {
-  /* config options here */
-  reactStrictMode: true,
   compiler: {
     styledComponents: true,
   },
   images: {
-    // add external hosts that serve character images. Verify the host name in the Network tab and add it here.
+    domains: [
+      "akabab.github.io",                // API host you already use
+      "vignette.wikia.nocookie.net",    // host shown in your screenshot
+      "rawcdn.githack.com",             // sometimes used as CDN
+      "raw.githubusercontent.com"
+    ],
+    // optional: remotePatterns allows broader matching if you have many subdomains
     remotePatterns: [
-      { protocol: "https", hostname: "akabab.github.io", pathname: "/**" },
-      { protocol: "https", hostname: "raw.githubusercontent.com", pathname: "/**" },
-      { protocol: "https", hostname: "rawcdn.githack.com", pathname: "/**" },
+      {
+        protocol: "https",
+        hostname: "vignette.wikia.nocookie.net",
+        pathname: "/**",
+      },
+      // { protocol: 'https', hostname: '**.nocookie.net', pathname: '/**' } // alternative wildcard
     ],
   },
 };
 
 export default nextConfig;
+
