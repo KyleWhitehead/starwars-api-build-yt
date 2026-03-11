@@ -11,7 +11,11 @@ const nextConfig = {
   },
   images: {
     // add external hosts that serve character images. Verify the host name in the Network tab and add it here.
-    domains: ["akabab.github.io", "raw.githubusercontent.com", "rawcdn.githack.com"],
+    remotePatterns: [
+      { protocol: "https", hostname: "akabab.github.io", pathname: "/**" },
+      { protocol: "https", hostname: "raw.githubusercontent.com", pathname: "/**" },
+      { protocol: "https", hostname: "rawcdn.githack.com", pathname: "/**" },
+    ],
   },
 };
 
