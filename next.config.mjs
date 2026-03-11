@@ -4,20 +4,32 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: [
-      "akabab.github.io",                // API host you already use
-      "vignette.wikia.nocookie.net",    // host shown in your screenshot
-      "rawcdn.githack.com",             // sometimes used as CDN
-      "raw.githubusercontent.com"
-    ],
-    // optional: remotePatterns allows broader matching if you have many subdomains
+    // Use `remotePatterns` instead of the deprecated `domains` list.
+    // This is more secure and prevents malicious users from forcing your app to fetch
+    // images from attacker-controlled hosts.
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "akabab.github.io",
+        pathname: "/**",
+      },
       {
         protocol: "https",
         hostname: "vignette.wikia.nocookie.net",
         pathname: "/**",
       },
-      // { protocol: 'https', hostname: '**.nocookie.net', pathname: '/**' } // alternative wildcard
+      {
+        protocol: "https",
+        hostname: "rawcdn.githack.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        pathname: "/**",
+      },
+      // Example wildcard pattern (uncomment if you need broader matching):
+      // { protocol: 'https', hostname: '**.nocookie.net', pathname: '/**' },
     ],
   },
 };
